@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>城城臭布布的六一专属祝福</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #8ee8ff 0%, #fff2a8 48%, #ffd1e8 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ff5c8a;
+    }
+    .card {
+      position: relative;
+      width: min(90vw, 430px);
+      padding: 34px 24px 30px;
+      text-align: center;
+      background: rgba(255,255,255,.76);
+      border-radius: 32px;
+      box-shadow: 0 18px 45px rgba(255, 110, 160, .28);
+      backdrop-filter: blur(8px);
+      animation: floatCard 3s ease-in-out infinite;
+      z-index: 3;
+    }
+    .bear { font-size: 72px; animation: shake 1.2s ease-in-out infinite; }
+    h1 {
+      margin: 4px 0 10px;
+      font-size: 32px;
+      line-height: 1.25;
+      text-shadow: 0 3px 0 #fff;
+      animation: pop 1.3s ease-in-out infinite alternate;
+    }
+    .name {
+      display: inline-block;
+      margin: 8px 0 12px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: #fff1a8;
+      color: #ff7a00;
+      font-size: 26px;
+      font-weight: 800;
+      box-shadow: inset 0 -4px 0 rgba(255, 196, 0, .25);
+    }
+    p {
+      margin: 12px 0;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #684c95;
+    }
+    .signature {
+      margin-top: 8px;
+      font-size: 17px;
+      color: #ff6f91;
+      font-weight: 700;
+    }
+    .btn {
+      margin-top: 18px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 24px;
+      background: linear-gradient(90deg, #ff82ad, #ffc857);
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(255, 120, 160, .36);
+    }
+    .floating {
+      position: fixed;
+      bottom: -45px;
+      font-size: 24px;
+      animation: rise linear forwards;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .cloud {
+      position: fixed;
+      width: 120px;
+      height: 42px;
+      background: rgba(255,255,255,.82);
+      border-radius: 999px;
+      animation: cloudMove 18s linear infinite;
+      z-index: 1;
+    }
+    .cloud::before, .cloud::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,.9);
+      border-radius: 50%;
+    }
+    .cloud::before { width: 58px; height: 58px; left: 18px; top: -24px; }
+    .cloud::after { width: 44px; height: 44px; right: 22px; top: -15px; }
+    .cloud.one { top: 12%; left: -150px; }
+    .cloud.two { top: 25%; left: -190px; animation-delay: -8s; transform: scale(.75); }
+    .rainbow {
+      position: fixed;
+      top: 8vh;
+      right: -20px;
+      font-size: 80px;
+      opacity: .82;
+      animation: rainbowFloat 4s ease-in-out infinite;
+      z-index: 1;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #ff5c8a;
+      font-weight: 800;
+      opacity: 0;
+      transition: .35s;
+      z-index: 4;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; bottom: 42px; }
+    @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes pop { from{transform:scale(1)} to{transform:scale(1.045)} }
+    @keyframes shake { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
+    @keyframes rise { from{transform:translateY(0) rotate(0deg);opacity:1} to{transform:translateY(-112vh) rotate(360deg);opacity:0} }
+    @keyframes cloudMove { from{transform:translateX(0)} to{transform:translateX(calc(100vw + 260px))} }
+    @keyframes rainbowFloat { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(12px) rotate(-3deg)} }
+  </style>
+</head>
+<body>
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
+  <div class="rainbow">🌈</div>
+
+  <div class="card">
+    <div class="bear">🧸</div>
+    <h1>六一儿童节快乐呀</h1>
+    <div class="name">城城小臭布布</div>
+    <p>
+      今天你可以不用长大，<br />
+      可以理直气壮地可爱，<br />
+      可以收下我的偏爱和糖果味祝福。<br />
+      愿你每天开心，永远有光，<br />
+      也永远是我最喜欢的小朋友。💖
+    </p>
+    <div class="signature">—— 来自最爱你的我</div>
+    <button class="btn" onclick="sendLove()">点我领取亲亲和抱抱 🎁</button>
+  </div>
+
+  <div id="toast" class="toast">城城小臭布布，儿童节快乐！💗</div>
+
+  <script>
+    const emojis = ["🎈", "💖", "🍭", "⭐", "🎁", "🧸", "🌸", "😘", "💕"];
+
+    function createFloat() {
+      const item = document.createElement("div");
+      item.className = "floating";
+      item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.animationDuration = 4 + Math.random() * 3 + "s";
+      item.style.fontSize = 18 + Math.random() * 24 + "px";
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), 7200);
+    }
+
+    function sendLove() {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1800);
+      for (let i = 0; i < 36; i++) {
+        setTimeout(createFloat, i * 60);
+      }
+    }
+
+    setInterval(createFloat, 520);
+  </script>
+</body>
+</html>
